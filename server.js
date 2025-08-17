@@ -2,13 +2,20 @@
 const fastify = require('fastify')({ logger: true });
 
 fastify.get('/', async (request, reply) => {
-  return { hello: 'world' };
+
+  console.log(request);
+  return { hello: 'world123' };
+});
+
+fastify.post('/', async (request, reply) => {
+
+  console.log(request);
+  return { hello: 'world123' };
 });
 
 const start = async () => {
   try {
     const port = process.env.PORT || 3000;
-    // Важно: host: '0.0.0.0', чтобы Heroku мог подключаться
     await fastify.listen({ port, host: '0.0.0.0' });
     console.log(`Server listening on ${port}`);
   } catch (err) {
