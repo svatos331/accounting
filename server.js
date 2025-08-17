@@ -8,9 +8,9 @@ fastify.get('/', async (request, reply) => {
 });
 
 fastify.post('/', async (request, reply) => {
-
-  console.log(request);
-  return { hello: 'world123' };
+  const body = request.body;
+  console.log('Received body:', body);
+  return { received: body };
 });
 
 const start = async () => {
