@@ -36,8 +36,10 @@ const compareNumbers = (a: any, b: any, coef: any) => {
 
 const getMistakesInExel = (
   data: IAnalyzeExelRequest[],
-): IAnalyzeExelRequest[] => {
-  const res = [];
+): { success: IAnalyzeExelRequest[]; mistakes: IAnalyzeExelRequest[] } => {
+  const mistakes: IAnalyzeExelRequest[] = [];
+  const success: IAnalyzeExelRequest[] = [];
+
   for (const i in data) {
     const el = data[i];
 
@@ -55,12 +57,16 @@ const getMistakesInExel = (
     );
     const line5 = compareNumbers(el.electricity, el.electricity_new, 500);
 
-    if (![line1, line2, line3, line4, line5].every((e) => e)) {
-      res.push(el);
+    const everyMistake = [line1, line2, line3, line4, line5].every((e) => e);
+
+    if (everyMistake) {
+      success.push(el);
+    } else {
+      mistakes.push(el);
     }
   }
 
-  return res;
+  return { success, mistakes };
 };
 
 export default getMistakesInExel;

@@ -11,8 +11,6 @@ export default async function analyzeExelController(fastify: FastifyInstance) {
     ) {
       const { fixedData, nonFixedData } = checkData(_request.body);
 
-      console.log(fixedData, nonFixedData, _request.body);
-
       reply.send({ fixedData, nonFixedData, body: _request.body });
     },
   );

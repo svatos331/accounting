@@ -1,14 +1,16 @@
 import getMistakesInExel from "./utils/getMistakesInExel";
 import { IAnalyzeExelRequest } from "../../controller/analyzeExelController/types";
+import tryToFix from "./utils/tryToFix";
 
 const checkData = (data: IAnalyzeExelRequest[]) => {
-  const mistakesInExel = getMistakesInExel(data);
-  console.log("mistakesInExel", mistakesInExel);
+  const { mistakes } = getMistakesInExel(data);
 
-  //   выдать массив тех которые можно поправить // и новые данные их
-  //   выдать массив тех которые поправить невозможно
+  const fixedMistakesInExel = mistakes?.map((el) => tryToFix(el));
 
-  return { fixedData: [], nonFixedData: [] };
+  const { success: fixedData, mistakes: nonFixedData } =
+    getMistakesInExel(fixedMistakesInExel);
+
+  return { fixedData, nonFixedData };
 };
 
 export default checkData;
