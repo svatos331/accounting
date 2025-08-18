@@ -4,6 +4,7 @@
   "description": "Fastify TypeScript starter repository",
   "scripts": {
     "watch": "tsc --watch --preserveWatchOutput --pretty",
+    "heroku-postbuild": "npm run build",
     "dev": "cross-env NODE_ENV=development nodemon",
     "format": "prettier --write \"src/**/*.ts\"",
     "build": "rimraf dist && tsc",
